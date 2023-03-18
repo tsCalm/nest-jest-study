@@ -40,3 +40,32 @@ test('adding positive numbers is not zero', () => {
 ```
 
 - not을 활용해서 나와서는 안되는 값을 테스트 할 수 있다.
+
+## null, undefined, true, false 체크 예제
+
+```
+test('null', () => {
+  const n = null;
+  expect(n).toBeNull();
+  expect(null).toBeDefined();
+  expect(n).not.toBeUndefined();
+  expect(n).not.toBeTruthy();
+  expect(n).toBeFalsy();
+});
+
+test('zero', () => {
+  const z = 0;
+  expect(z).not.toBeNull();
+  expect(z).toBeDefined();
+  expect(z).not.toBeUndefined();
+  expect(z).not.toBeTruthy();
+  expect(z).toBeFalsy();
+});
+
+```
+
+- toBeFalsy : false, null, undefined, 0 를 체크한다.
+- toBeTruthy : toBeFalsy 함수의 반대
+- toBeDefined : undefined가 아니면 통과
+- toBeUndefined : undefined면 통과
+- toBeNull : null이면 통과
