@@ -111,3 +111,18 @@ test('adding floating point numbers', () => {
 - toBeGreaterThan : 함수의 인자값보다 예상값이 작거나 같아야한다.
   - 예) 5 <= 4.5
 - 부동소수점의 경우 toBe()를 사용하지 않고 toBeCloseTo()를 사용한다.
+
+## string 예제
+
+```
+test('there is no I in team', () => {
+  expect('team').not.toMatch(/I/);
+});
+
+test('but there is a "stop" in Christoph', () => {
+  expect('Christoph').toMatch(/stop/);
+});
+
+```
+
+- toMatch : expect 값을 정규식으로 검사
