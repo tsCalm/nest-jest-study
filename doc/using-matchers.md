@@ -126,3 +126,46 @@ test('but there is a "stop" in Christoph', () => {
 ```
 
 - toMatch : expect 값을 정규식으로 검사
+
+## Arrays and Iterables 예제
+
+```
+const shoppingList = [
+  'diapers',
+  'kleenex',
+  'trash bags',
+  'paper towels',
+  'milk',
+];
+
+test('the shopping list has milk on it', () => {
+  expect(shoppingList).toContain('milk');
+  expect(new Set(shoppingList)).toContain('milk');
+});
+```
+
+- toContain : 어레이에 아이템이 존재하는지 검사할 때 사용한다.
+
+## Exception 예제
+
+```
+function compileAndroidCode() {
+  throw new Error('you are using the wrong JDK!');
+}
+
+test('compiling android goes as expected', () => {
+  expect(() => compileAndroidCode()).toThrow();
+  expect(() => compileAndroidCode()).toThrow(Error);
+
+  // You can also use a string that must be contained in the error message or a regexp
+  expect(() => compileAndroidCode()).toThrow('you are using the wrong JDK');
+  expect(() => compileAndroidCode()).toThrow(/JDK/);
+
+  // Or you can match an exact error message using a regexp like below
+  expect(() => compileAndroidCode()).toThrow(/^you are using the wrong JDK$/); // Test fails
+  expect(() => compileAndroidCode()).toThrow(/^you are using the wrong JDK!$/); // Test pass
+});
+```
+
+- expect(() => compileAndroidCode()).toThrow() : 에러를 체크한다.
+- toThrow(/JDK/) : 정규식으로 에러 메시지 체크
