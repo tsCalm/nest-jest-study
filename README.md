@@ -8,3 +8,4 @@
 ## 개발자 향로님 블로그 포스팅 학습 및 기록
 
 - [내부 구현 검증 피하기](doc/jojoldu-blog/avoid-internal-implementation-verification.md)
+- [검증부 하드 코딩](doc/jojoldu-blog/assert-expect-hard-conding.md)
