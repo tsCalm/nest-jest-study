@@ -28,3 +28,9 @@ mockedList.get(0)이 호출될 때 "first"라는 값을 반환하도록 설정�
 - when을 통한 함수의 행위가 지정되면 함수의 구현은 중요하지 않다. when으로 지정된 설정이 중요하고 그대로 테스트를 진행한다.
 
 - 실제 구현은 변경될 가능성이 높기 때문에 mock함수를 통한 테스트에서는 실 구현부가 중요하지 않은 것으로 추정
+
+- thenReturn말고도 thenThrow, thenCall, thenResolve, thenReject등을 사용하여 테스트 가능
+  - thenThrow: throw Error
+  - thenCall: 별도의 커스텀 메소드(함수)를 호출
+  - thenResolve: resolve promise
+  - thenReject: rejects promise
