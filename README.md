@@ -16,3 +16,5 @@
 
 - [내부 구현 검증 피하기](doc/jojoldu-blog/avoid-internal-implementation-verification.md)
 - [검증부 하드 코딩](doc/jojoldu-blog/assert-expect-hard-conding.md)
+
+## [ts-mokito 학습](doc/ts-mockito.md)
