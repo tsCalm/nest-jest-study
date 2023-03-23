@@ -1,4 +1,4 @@
-# ts-mokito 학습 기록
+# ts-mokito 학습 기록 ([개발자 향로님 블로그 포스팅을 참조](https://jojoldu.tistory.com/638))
 
 ## when
 
@@ -38,7 +38,7 @@ mockedList.get(0)이 호출될 때 "first"라는 값을 반환하도록 설정�
 ## verify
 
 <em><strong>binning 채팅 질문 </strong></em></br>
-<u>ts-mokito when함수는 언제 사용해야하나요?</u>
+<u>ts-mokito verify 함수는 언제 사용해야하나요?</u>
 
 <em><strong>답변</strong></em></br>
 ts-mockito의 verify 함수는 특정 메소드가 호출되었는지 검증하는 함수입니다.</br> 이 함수는 호출 횟수를 지정할 수 있으며, 호출된 인자도 검증할 수 있습니다.</br> ts-mockito의 verify 함수는 Jest의 expect().toHaveBeenCalled()와 유사한 기능을 제공합니다.
@@ -46,3 +46,14 @@ ts-mockito의 verify 함수는 특정 메소드가 호출되었는지 검증하�
 - verify(테스트 함수(파라메터)).[times, never, atLeast ... ]()으로 어떤 파라메터로 함수의 호출횟수 및 순서를 검증할 수 있다.
 
 - verify의 인자는 instance() 의 결과가 아닌 mock(OrderService) 의 결과가 사용되어야 한다
+
+## capture
+
+<em><strong>binning 채팅 질문 </strong></em></br>
+<u>ts-mokito capture 함수는 언제 사용해야하나요?</u>
+
+<em><strong>답변</strong></em></br>
+capture 함수는 ts-mockito에서 제공하는 함수 중 하나로, 함수의 인자를 캡쳐하여 저장할 수 있습니다.</br> 이 함수는 verify와 함께 사용되어 특정 인자가 함수에 전달되었는지 확인할 때 유용합니다2.
+
+- 메서드는 여러번 호출될 수 있으므로 메서드의 파라메터는 배열 형태로 관리된다.
+- capture는 함수의 파라메터를 배열로 관리하기 때문에 검증 또한 배열의 형태로 해야한다.
