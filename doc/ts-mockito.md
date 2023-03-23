@@ -23,7 +23,7 @@ when(mockedList.get(0)).thenReturn("first");
 
 mockedList.get(0)이 호출될 때 "first"라는 값을 반환하도록 설정한 것입니다.
 
-- when(테스트할 함수(파라메터)).thenReturn(리턴값 설정)으로 테스트를 원하는 함수의 파라메터 타입과 리턴타입을 지정할 수 있다.
+- when(테스트 함수(파라메터)).thenReturn(리턴값 설정)으로 테스트를 원하는 함수의 파라메터 타입과 리턴타입을 지정할 수 있다.
 
 - when을 통한 함수의 행위가 지정되면 함수의 구현은 중요하지 않다. when으로 지정된 설정이 중요하고 그대로 테스트를 진행한다.
 
@@ -34,3 +34,13 @@ mockedList.get(0)이 호출될 때 "first"라는 값을 반환하도록 설정�
   - thenCall: 별도의 커스텀 메소드(함수)를 호출
   - thenResolve: resolve promise
   - thenReject: rejects promise
+
+## verify
+
+<em><strong>binning 채팅 질문 </strong></em></br>
+<u>ts-mokito when함수는 언제 사용해야하나요?</u>
+
+<em><strong>답변</strong></em></br>
+ts-mockito의 verify 함수는 특정 메소드가 호출되었는지 검증하는 함수입니다.</br> 이 함수는 호출 횟수를 지정할 수 있으며, 호출된 인자도 검증할 수 있습니다.</br> ts-mockito의 verify 함수는 Jest의 expect().toHaveBeenCalled()와 유사한 기능을 제공합니다.
+
+- verify(테스트 함수(파라메터)).[times, never, atLeast ... ]()으로 어떤 파라메터로 함수의 호출횟수 및 순서를 검증할 수 있다.

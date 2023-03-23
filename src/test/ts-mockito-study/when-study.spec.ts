@@ -9,30 +9,7 @@ import {
   objectContaining,
   when,
 } from 'ts-mockito';
-
-class TestClass {}
-const testFunction = () => true;
-
-class TsMokitoTestService {
-  anyStringTest(param: string) {
-    return param;
-  }
-  anyNumberTest(param: number) {
-    return param;
-  }
-  anyClassTest(param: TestClass) {
-    return param;
-  }
-  anyFunctionTest(func: Function) {
-    return func();
-  }
-  betweenTest(num: number) {
-    return num.toString();
-  }
-  anyObjectTest(obj: object) {
-    return obj.toString();
-  }
-}
+import { TestClass, testFunction, TsMokitoTestService } from './mock-variables';
 
 it('when', () => {
   /** given **/
