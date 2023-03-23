@@ -44,3 +44,5 @@ mockedList.get(0)이 호출될 때 "first"라는 값을 반환하도록 설정�
 ts-mockito의 verify 함수는 특정 메소드가 호출되었는지 검증하는 함수입니다.</br> 이 함수는 호출 횟수를 지정할 수 있으며, 호출된 인자도 검증할 수 있습니다.</br> ts-mockito의 verify 함수는 Jest의 expect().toHaveBeenCalled()와 유사한 기능을 제공합니다.
 
 - verify(테스트 함수(파라메터)).[times, never, atLeast ... ]()으로 어떤 파라메터로 함수의 호출횟수 및 순서를 검증할 수 있다.
+
+- verify의 인자는 instance() 의 결과가 아닌 mock(OrderService) 의 결과가 사용되어야 한다
