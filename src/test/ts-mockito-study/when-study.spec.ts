@@ -1,36 +1,62 @@
-import { anyNumber, anyString, instance, mock, when } from 'ts-mockito';
+import {
+  anyFunction,
+  anyNumber,
+  anyOfClass,
+  anyString,
+  between,
+  instance,
+  mock,
+  objectContaining,
+  when,
+} from 'ts-mockito';
 
-export class TsMokitoTestService {
+class TestClass {}
+const testFunction = () => true;
+
+class TsMokitoTestService {
   anyStringTest(param: string) {
     return param;
   }
   anyNumberTest(param: number) {
     return param;
   }
+  anyClassTest(param: TestClass) {
+    return param;
+  }
+  anyFunctionTest(func: Function) {
+    return func();
+  }
+  betweenTest(num: number) {
+    return num.toString();
+  }
+  anyObjectTest(obj: object) {
+    return obj.toString();
+  }
 }
-
-class TestClass {}
-const testFunction = () => true;
 
 it('when', () => {
   /** given **/
   const mockService: TsMokitoTestService = mock(TsMokitoTestService);
   // string
-  when(mockService.anyStringTest(anyString())).thenReturn(anyString());
-  // when(mockService.anyStringTest('inflab')).thenReturn('inflab');
+  // when(mockService.anyStringTest(anyString())).thenReturn(anyString());
+  // when(mockService.anyStringTest('test')).thenReturn('test');
 
   // // number
-  // when(mockService.getOrder(anyNumber())).thenReturn('anyNumber');
-  // when(mockService.getOrder(1)).thenReturn(1);
+  // when(mockService.anyNumberTest(anyNumber())).thenReturn(22);
+  // when(mockService.anyNumberTest(22)).thenReturn(22);
 
   // // Class & Function
-  // when(mockService.getOrder(anyOfClass(TestClass))).thenReturn('TestClass');
-  // when(mockService.getOrder(anyFunction())).thenReturn('anyFunction');
-  // when(mockService.getOrder(testFunction)).thenReturn('testFunction');
+  // when(mockService.anyClassTest(anyOfClass(TestClass))).thenReturn('TestClass');
+  // when(mockService.anyFunctionTest(anyFunction())).thenReturn('anyFunction');
+  // when(mockService.anyFunctionTest(testFunction)).thenReturn('testFunction');
 
   // // 범위 조건
-  // when(mockService.getOrder(between(10, 20))).thenReturn('between 10 and 20');
-  // when(mockService.getOrder(objectContaining({ a: 1 }))).thenReturn('{ a: 1 }');
+  // when(mockService.betweenTest(between(10, 20))).thenReturn(
+  //   'between 10 and 20',
+  // );
+  when(mockService.anyObjectTest(objectContaining({ a: 1 }))).thenReturn(
+    '{ a: 1 }',
+  );
 
   // /** when **/
   const service: TsMokitoTestService = instance(mockService);
@@ -38,19 +64,18 @@ it('when', () => {
   // /** then **/
 
   // // string
-  expect(service.anyStringTest(anyString())).toBe(anyString());
-  // expect(service.getOrder('inflab')).toBe('inflab');
+  // expect(service.anyStringTest('test')).toBe('test');
 
   // // number
-  // expect(service.getOrder(22)).toBe('anyNumber');
+  // expect(service.anyNumberTest(22)).toBe(22);
   // expect(service.getOrder(1)).toBe(1);
 
   // // Class & Function
-  // expect(service.getOrder(new TestClass())).toBe('TestClass');
-  // expect(service.getOrder(() => {})).toBe('anyFunction');
-  // expect(service.getOrder(testFunction)).toBe('testFunction');
+  // expect(service.anyClassTest(new TestClass())).toBe('TestClass');
+  // expect(service.anyFunctionTest(() => {})).toBe('anyFunction');
+  // expect(service.anyFunctionTest(testFunction)).toBe('testFunction');
 
   // // 범위 조건
-  // expect(service.getOrder(19)).toBe('between 10 and 20');
-  // expect(service.getOrder({ b: 2, c: 3, a: 1 })).toBe('{ a: 1 }');
+  // expect(service.betweenTest(10)).toBe('between 10 and 20');
+  expect(service.anyObjectTest({ b: 2, c: 3, a: 1 })).toBe('{ a: 1 }');
 });
