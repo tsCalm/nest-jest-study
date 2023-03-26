@@ -1,27 +1,26 @@
-// > new Intl.DateTimeFormat("ko", { dateStyle: 'full' }).format(new Date())
-// '2022년 3월 8일 화요일'
-// > new Intl.DateTimeFormat("ko", { dateStyle: 'long' }).format(new Date())
-// '2022년 3월 8일'
-// > new Intl.DateTimeFormat("ko", { dateStyle: 'medium' }).format(new Date())
-// '2022. 3. 8.'
-// > new Intl.DateTimeFormat("ko", { dateStyle: 'short' }).format(new Date())
-// '22. 3. 8.'
+const dayFormatter = (day: number) => {
+  if (day < 0 || day > 6) return '???';
+  const days = [
+    '일요일',
+    '월요일',
+    '화요일',
+    '수요일',
+    '목요일',
+    '금요일',
+    '토요일',
+  ];
+  return days[day];
+};
 
-it('[Bad] 가변결과 검증', () => {
-  const dayFormatter = (day: number) => {
-    if (day < 0 || day > 6) return '???';
-    const days = [
-      '일요일',
-      '월요일',
-      '화요일',
-      '수요일',
-      '목요일',
-      '금요일',
-      '토요일',
-    ];
-    return days[day];
-  };
+class Calculator {
+  calculate(num_one: number, num_two: number) {
+    // 특이케이스
+    if (num_one === 3 && num_two === 4) return 8;
+    return num_one + num_two;
+  }
+}
 
+it('[안좋은 코드] 가변결과 검증', () => {
   const today = new Date();
   const day = today.getDay();
   const result = dayFormatter(day);
@@ -47,3 +46,61 @@ it('[Bad] 가변결과 검증', () => {
 
   expect(result).toBe(actual);
 });
+
+it('[개선 코드] day === 0, 일요일 반환', () => {
+  const result = dayFormatter(0);
+
+  expect(result).toBe('일요일');
+});
+
+it.each([
+  [0, '일요일'],
+  [1, '월요일'],
+  [2, '화요일'],
+  [3, '수요일'],
+  [4, '목요일'],
+  [5, '금요일'],
+  [6, '토요일'],
+  [7, '???'],
+])('[개선 코드 조건별 테스트]', (day, actual) => {
+  const result = dayFormatter(day);
+
+  expect(result).toBe(actual);
+});
+
+it('테스트에서 프로덕션 로직 사용, 나쁜코드', () => {
+  const sut = new Calculator();
+  let result;
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      const actual = sut.calculate(i, j);
+
+      if (i == 3 && j == 4)
+        // 특이케이스
+        result = 8;
+      else result = i + j;
+
+      expect(result).toBe(actual);
+    }
+  }
+});
+
+it('테스트에서 프로덕션 로직 사용, 개선코드 - 예외 상황만 따로 테스트', () => {
+  const sut = new Calculator();
+  const result = sut.calculate(3, 4);
+  expect(result).toBe(8);
+});
+
+it.each([
+  [3, 4, 8],
+  [1, 1, 2],
+])(
+  '테스트에서 프로덕션 로직 사용, 개선코드 - 조건별 테스트',
+  (num1, num2, actual) => {
+    const sut = new Calculator();
+
+    const result = sut.calculate(num1, num2);
+
+    expect(result).toBe(actual);
+  },
+);
